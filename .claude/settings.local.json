@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rustc:*)",
+      "Bash(cargo:*)",
+      "Bash(make download-test-data:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Bash(make ci-local:*)"
+    ]
+  }
+}
