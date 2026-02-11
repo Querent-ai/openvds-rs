@@ -1,7 +1,7 @@
 //! Compression and decompression for VDS data
 
 use crate::error::{Result, VdsError};
-use flate2::read::{DeflateDecoder, DeflateEncoder};
+use flate2::read::{ZlibDecoder, ZlibEncoder};
 use flate2::Compression as FlateCompression;
 use serde::{Deserialize, Serialize};
 use std::io::Read;
@@ -104,7 +104,7 @@ pub struct DeflateCompressor;
 
 impl Compressor for DeflateCompressor {
     fn compress(&self, data: &[u8], level: CompressionLevel) -> Result<Vec<u8>> {
-        let mut encoder = DeflateEncoder::new(data, FlateCompression::new(level.value() as u32));
+        let mut encoder = ZlibEncoder::new(data, FlateCompression::new(level.value() as u32));
         let mut compressed = Vec::new();
         encoder
             .read_to_end(&mut compressed)
@@ -113,7 +113,7 @@ impl Compressor for DeflateCompressor {
     }
 
     fn decompress(&self, data: &[u8], expected_size: Option<usize>) -> Result<Vec<u8>> {
-        let mut decoder = DeflateDecoder::new(data);
+        let mut decoder = ZlibDecoder::new(data);
         let mut decompressed = if let Some(size) = expected_size {
             Vec::with_capacity(size)
         } else {
