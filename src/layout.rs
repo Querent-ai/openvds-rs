@@ -148,7 +148,7 @@ impl VolumeDataLayout {
             .enumerate()
             .map(|(i, axis)| {
                 let brick_dim = self.brick_size.get(i);
-                (axis.num_samples + brick_dim - 1) / brick_dim
+                axis.num_samples.div_ceil(brick_dim)
             })
             .collect()
     }
