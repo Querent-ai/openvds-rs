@@ -25,7 +25,7 @@ flate2 = "1.0"  # For deflate/zip compression
 zstd = "0.13"   # Modern compression
 
 # HTTP client (optional for custom backends like OSDU)
-reqwest = { version = "0.11", features = ["json"] }
+reqwest = { version = "0.11", features = ["json", "rustls-tls"], default-features = false, optional = true }
 
 # Utilities
 thiserror = "1.0"
@@ -46,6 +46,8 @@ tempfile = "3.0"
 
 [features]
 default = []
+# HTTP client for custom cloud backends
+http-client = ["reqwest"]
 
 [lib]
 name = "openvds"

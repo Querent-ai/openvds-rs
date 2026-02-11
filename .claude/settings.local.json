@@ -6,7 +6,8 @@
       "Bash(make download-test-data:*)",
       "Bash(cat:*)",
       "Bash(ls:*)",
-      "Bash(make ci-local:*)"
+      "Bash(make ci-local:*)",
+      "Bash(rustup target:*)"
     ]
   }
 }
