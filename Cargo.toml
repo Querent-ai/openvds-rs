@@ -9,6 +9,12 @@ description = "Pure Rust OpenVDS implementation - async I/O for multi-dimensiona
 repository = "https://github.com/Querent-ai/openvds-rs"
 keywords = ["seismic", "volumetric", "compression", "vds", "geophysics"]
 categories = ["science", "compression", "filesystem"]
+exclude = [
+    "test-data/*",
+    ".github/*",
+    "context/*",
+    ".claude/*",
+]
 
 [dependencies]
 # Serialization
