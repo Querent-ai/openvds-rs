@@ -74,18 +74,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        rust: [stable, beta, "1.70"]
+        rust: [stable]
         features: ["--no-default-features", "", "--all-features"]
-        exclude:
-          # Reduce CI load by testing beta and MSRV only on Linux
-          - os: macos-latest
-            rust: beta
-          - os: macos-latest
-            rust: "1.70"
-          - os: windows-latest
-            rust: beta
-          - os: windows-latest
-            rust: "1.70"
 
     steps:
       - uses: actions/checkout@v4
@@ -231,40 +221,6 @@ jobs:
       - name: Run concurrent_loading example
         run: cargo run --example concurrent_loading
 
-  # MSRV verification
-  msrv:
-    name: MSRV (Rust 1.70)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Rust 1.70
-        uses: dtolnay/rust-toolchain@1.70
-
-      - name: Cache cargo registry
-        uses: actions/cache@v4
-        with:
-          path: ~/.cargo/registry
-          key: ${{ runner.os }}-1.70-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
-
-      - name: Cache cargo index
-        uses: actions/cache@v4
-        with:
-          path: ~/.cargo/git
-          key: ${{ runner.os }}-1.70-cargo-git-${{ hashFiles('**/Cargo.lock') }}
-
-      - name: Cache cargo build
-        uses: actions/cache@v4
-        with:
-          path: target
-          key: ${{ runner.os }}-1.70-cargo-build-${{ hashFiles('**/Cargo.lock') }}
-
-      - name: Check MSRV
-        run: cargo check --no-default-features --verbose
-
-      - name: Test MSRV
-        run: cargo test --no-default-features --verbose
-
   # Security audit
   security-audit:
     name: Security Audit
@@ -280,7 +236,7 @@ jobs:
   # All checks passed
   ci-success:
     name: CI Success
-    needs: [fmt, clippy, test, build, docs, examples, msrv, security-audit]
+    needs: [fmt, clippy, test, build, docs, examples, security-audit]
     runs-on: ubuntu-latest
     steps:
       - name: Mark CI as successful

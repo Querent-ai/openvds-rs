@@ -2,7 +2,7 @@
 name = "openvds"
 version = "0.2.0"
 edition = "2021"
-rust-version = "1.70"
+rust-version = "1.75"
 authors = ["OpenVDS Rust Contributors"]
 license = "Apache-2.0"
 description = "Pure Rust OpenVDS implementation - async I/O for multi-dimensional volumetric data with local filesystem support"
