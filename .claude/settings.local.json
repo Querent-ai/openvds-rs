@@ -9,7 +9,9 @@
       "Bash(make ci-local:*)",
       "Bash(rustup target:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git tag:*)",
+      "Bash(git push:*)"
     ]
   }
 }
