@@ -2,11 +2,7 @@
 //!
 //! Run with: cargo run --example concurrent_loading
 
-use openvds::{
-    AxisDescriptor, BrickSize, CompressionMethod, DataType, VdsMetadata, VolumeDataAccess,
-    VolumeDataLayout,
-};
-use std::time::Instant;
+use openvds::{AxisDescriptor, BrickSize, DataType, VolumeDataLayout};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

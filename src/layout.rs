@@ -25,8 +25,8 @@ impl BrickSize {
         }
 
         let mut dims = [1; 6];
-        for i in 0..dimensionality {
-            dims[i] = size;
+        for item in dims.iter_mut().take(dimensionality) {
+            *item = size;
         }
         Ok(Self { dims })
     }
@@ -164,9 +164,9 @@ impl VolumeDataLayout {
         let mut coords = vec![0; self.dimensionality];
         let mut remaining = index;
 
-        for i in (0..self.dimensionality).rev() {
+        for (i, coord) in coords.iter_mut().enumerate().take(self.dimensionality) {
             let stride: usize = brick_count.iter().skip(i + 1).product();
-            coords[i] = remaining / stride;
+            *coord = remaining / stride;
             remaining %= stride;
         }
 
@@ -178,9 +178,9 @@ impl VolumeDataLayout {
         let brick_count = self.brick_count();
         let mut index = 0;
 
-        for i in 0..self.dimensionality {
+        for (i, &coord) in coords.iter().enumerate().take(self.dimensionality) {
             let stride: usize = brick_count.iter().skip(i + 1).product();
-            index += coords[i] * stride;
+            index += coord * stride;
         }
 
         index

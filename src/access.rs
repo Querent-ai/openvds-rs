@@ -149,9 +149,10 @@ impl VolumeDataAccess {
 
     /// Read specific bricks by their indices
     async fn read_bricks(&self, indices: &[usize]) -> Result<HashMap<usize, Vec<u8>>> {
-        let metadata = self.metadata.read();
-        let _compressor = get_compressor(metadata.compression);
-        drop(metadata);
+        {
+            let metadata = self.metadata.read();
+            let _compressor = get_compressor(metadata.compression);
+        }
 
         // Read all bricks concurrently
         let futures: Vec<_> = indices

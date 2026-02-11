@@ -156,11 +156,7 @@ pub async fn create_io_manager(url: &str) -> Result<Box<dyn IOManager>> {
     match backend {
         StorageBackend::FileSystem => {
             // Extract path from file:// URL or use as-is
-            let path = if url.starts_with("file://") {
-                &url[7..]
-            } else {
-                url
-            };
+            let path = url.strip_prefix("file://").unwrap_or(url);
             Ok(Box::new(FileSystemIOManager::new(path)))
         }
         StorageBackend::S3 | StorageBackend::Azure | StorageBackend::GCS | StorageBackend::SeismicDMS => {

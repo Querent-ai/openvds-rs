@@ -53,10 +53,6 @@ impl CompressionLevel {
         Self(1)
     }
 
-    pub fn default() -> Self {
-        Self(6)
-    }
-
     pub fn best() -> Self {
         Self(9)
     }
@@ -68,7 +64,7 @@ impl CompressionLevel {
 
 impl Default for CompressionLevel {
     fn default() -> Self {
-        Self::default()
+        Self(6)
     }
 }
 
