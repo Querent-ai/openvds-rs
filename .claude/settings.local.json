@@ -7,7 +7,9 @@
       "Bash(cat:*)",
       "Bash(ls:*)",
       "Bash(make ci-local:*)",
-      "Bash(rustup target:*)"
+      "Bash(rustup target:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }
